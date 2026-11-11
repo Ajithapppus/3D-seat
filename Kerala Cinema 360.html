@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Kerala Cinema 360</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--bg:#0b0b0d;--panel:#16161a;--line:#2a2a31;--tx:#eee;--mut:#9a9aa6;--gold:#e6b450}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+nav{display:flex;gap:18px;align-items:center;padding:12px 20px;background:rgba(20,20,24,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex-wrap:wrap}
+nav b{color:var(--gold);letter-spacing:.08em}nav span{color:var(--mut);font-size:13px}
+.hero{padding:34px 20px 10px;max-width:1200px;margin:auto}
+h1{font-size:clamp(26px,5vw,44px);margin:0 0 6px;letter-spacing:.02em}h1 em{color:var(--gold);font-style:normal}
+.hero p{color:var(--mut);margin:0 0 14px}
+.warn{background:#2a2112;border:1px solid #5b4720;color:#f0d9a0;padding:10px 14px;border-radius:8px;font-size:13px}
+main{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;max-width:1200px;margin:16px auto;padding:0 20px}
+@media(max-width:860px){main{grid-template-columns:minmax(0,1fr)}}section{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+#cv{position:relative;height:440px;border-radius:12px;overflow:hidden;background:#000;touch-action:none;cursor:grab}
+#cv canvas{display:block;width:100%;height:100%}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+button,select{background:#202027;color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit;font-size:13px;cursor:pointer}
+button:hover{border-color:var(--gold)}button.gold{background:var(--gold);color:#111;border-color:var(--gold);font-weight:600}
+button:disabled{opacity:.5;cursor:not-allowed}
+label{font-size:12px;color:var(--mut);display:block;margin:8px 0 3px}select{width:100%}
+#map{overflow-x:auto;padding:8px 0}.row{display:flex;gap:4px;align-items:center;margin-bottom:4px;min-width:max-content}
+.rl{width:18px;color:var(--mut);font-size:12px}.gap{width:14px}
+.s{width:26px;height:26px;padding:0;font-size:10px;border-radius:5px;border:0;color:#111}
+.screenbar{height:5px;background:linear-gradient(90deg,transparent,#cfe3ff,transparent);margin:2px 0 10px;border-radius:3px}
+.lg{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:6px}.lg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:4px 6px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
+h3{margin:0 0 8px;font-size:14px;color:var(--gold);letter-spacing:.05em}.m{color:var(--mut);font-size:12px}
+button,select{touch-action:manipulation}select{font-size:16px}
+@media(max-width:860px){
+nav{position:static;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;gap:14px;padding:10px 14px}
+.hero{padding:16px 14px 4px}.hero p{font-size:14px}.warn{font-size:12px}
+main{padding:0 12px;margin:10px auto;gap:10px}
+main>section:first-child{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;z-index:4;background:var(--bg);padding:6px 0}
+#cv{height:min(38vh,340px);min-height:210px}
+.bar{gap:5px}.bar button{flex:1;padding:9px 4px;font-size:12px}#spin{flex-basis:100%}.hint{display:none}}
+@media(pointer:coarse){.s{width:34px;height:34px;font-size:12px}button{min-height:38px}}
+</style></head><body>
+<nav><b>KERALA CINEMA 360</b><span>Home</span><span>Movies</span><span>Theatres</span><span style="color:var(--gold)">3D Experience</span><span>My Bookings</span><span>Login</span></nav>
+<div class="hero"><h1>YOUR SEAT. YOUR VIEW. <em>YOUR CINEMA.</em></h1><p>Explore Kerala’s cinemas in 360°. Choose your perfect seat before you book.</p>
+<div class="warn"><b>Prototype – demo data only.</b> Theatre names are from your brief; every layout, price and seat status below is a simulated placeholder, not verified theatre data or BookMyShow pricing. Movies, showtimes, live pricing, payments and accounts need authorized integrations and a backend.</div></div>
+<noscript><div class="warn" style="margin:12px 14px">JavaScript is turned off in this viewer, so the 3D theatre and seat map can't load. Open this page in Safari or Chrome.</div></noscript>
+<main>
+<section><div id="cv"><div id="lbl" style="position:absolute;left:10px;top:8px;z-index:2;font-size:12px;color:#fff;background:rgba(0,0,0,.6);padding:3px 9px;border-radius:6px;pointer-events:none"></div></div>
+<div class="bar"><button data-v="o">Overview</button><button data-v="f">Front</button><button data-v="r">Rear</button><button data-v="l">Left</button><button data-v="rt">Right</button><button id="spin" class="gold">360° VIEW FROM THIS SEAT</button></div>
+<p class="m hint">Drag to rotate · scroll/pinch to zoom · click a seat (3D or map) to see the screen from it.</p></section>
+<section class="card">
+<label>Theatre (Thiruvananthapuram)</label><select id="th"></select>
+<label>Screen</label><select id="sc"><option>Screen 1</option><option>Screen 2</option></select>
+<div class="m" id="vs" style="margin-top:6px"></div>
+<h3 style="margin-top:12px">SEAT MAP</h3><div class="screenbar"></div><div id="map"></div>
+<div class="lg"><span><i style="background:#2ecc71"></i>Available</span><span><i style="background:#d33"></i>Booked</span><span><i style="background:#f5c518"></i>Selected</span><span><i style="background:#666"></i>Unavailable</span><span><i style="background:#9b5de5"></i>Premium</span></div>
+<h3 style="margin-top:14px">VIEW FROM SEAT</h3><div id="cmp" class="m">Select a seat.</div>
+<h3 style="margin-top:14px">YOUR TICKETS</h3><div id="sum" class="m">No seats selected.</div>
+<button id="pay" disabled style="margin-top:8px;width:100%">Checkout – Razorpay not connected</button>
+</section></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>if(!window.THREE){document.getElementById("cv").innerHTML="<p style='padding:16px;color:#f0d9a0'>The 3D engine could not load. Check your internet connection and open this page in Safari or Chrome.</p>"}</script>
+<script>
+const TH=["Aries Plex SL Cinemas","PVR Lulu Mall","Sree Padmanabha Theatre","New Theatre","Kairali Sree Theatre","Ajanta Theatre","Kalabhavan Theatre","Nishagandhi Open Air Theatre"];
+const CATS=[{n:"Classic",p:150},{n:"Executive",p:180},{n:"Premium",p:220},{n:"Recliner",p:350}];
+const THEME=[{w:0x2a1f24,c:0x5a1020},{w:0x1b2430,c:0x123a5a},{w:0x2b2a1c,c:0x6a4a10},{w:0x1f2b24,c:0x0f4a2a},{w:0x2c1f2c,c:0x4a1a5a},{w:0x262626,c:0x7a1a1a},{w:0x1c2a2c,c:0x0f4a4a},{w:0x101a2e,c:0x222244,open:1}];
+const $=id=>document.getElementById(id);
+$("th").innerHTML=TH.map((t,i)=>`<option value="${i}">${t}</option>`).join("");
+let L,pan=[],sel=[],seatMesh={},cur=null,mode="o",th=0,ph=.45,rad=12,yaw=0,pitch=0,fovT=60,spin=false;
+function rnd(s){return()=>(s=(s*16807)%2147483647)/2147483647}
+function build(ti,si){const rows=8+(ti%3),cols=10+((ti*2+si*3)%6)*1,aisle=Math.floor(cols/2),sw0=0;
+ const r=rnd(ti*31+si*7+11),seats=[];const W=cols*.62+3,D=rows*.9+6,sw=W*(.7+(ti%4)*.04);
+ for(let i=0;i<rows;i++)for(let c=0;c<cols;c++){const rc=1+(ti%2),cat=i>=rows-rc?3:i>=rows-rc-2?2:i>=rows/3?1:0;const v=r();
+  seats.push({id:String.fromCharCode(65+i)+(c+1),i,c,cat,st:v<.25?"b":v<.28?"u":"a",x:(c-(cols-1)/2)*.62+(c>=aisle?.3:-.3),y:i*.25,z:3+i*.9});}
+ return{ti,rows,cols,aisle,seats,W,D,sw}}
+const cv=$("cv"),ren=new THREE.WebGLRenderer({antialias:true});cv.appendChild(ren.domElement);
+const sc=new THREE.Scene();sc.background=new THREE.Color(0x050507);
+const cam=new THREE.PerspectiveCamera(60,1,.1,100),dm=new THREE.PerspectiveCamera();
+const grp=new THREE.Group();sc.add(grp);sc.add(new THREE.AmbientLight(0x8888aa,.7));
+const ray=new THREE.Raycaster();
+function col(s){return sel.includes(s.id)?0xf5c518:s.st==="b"?0xdd3333:s.st==="u"?0x666666:s.cat>=2?0x9b5de5:0x2ecc71}
+function scene3d(){while(grp.children.length)grp.remove(grp.children[0]);pan=[];seatMesh={};
+ const TM=THEME[L.ti],op=!!TM.open;const room=new THREE.Mesh(new THREE.BoxGeometry(L.W,7,L.D),[0,1,2,3,4,5].map(k=>new THREE.MeshStandardMaterial({color:TM.w,side:THREE.BackSide,visible:!(op&&k===2)})));room.position.set(0,3.5,L.D/2-.5);grp.add(room);
+ const scr=new THREE.Mesh(new THREE.PlaneGeometry(L.sw,L.sw*.42),new THREE.MeshBasicMaterial({color:0xcfe3ff}));scr.position.set(0,3.4,-.45);grp.add(scr);
+ const pl=new THREE.PointLight(0xaaccff,.8,30);pl.position.set(0,3.4,2);grp.add(pl);const cl=new THREE.PointLight(0xffe0b0,.6,25);cl.position.set(0,6.5,L.D/2);grp.add(cl);
+ for(let i=0;i<L.rows;i++){const p=new THREE.Mesh(new THREE.BoxGeometry(L.W,i*.25+.1,.9),new THREE.MeshStandardMaterial({color:0x1d1d24}));p.position.set(0,(i*.25+.1)/2-.05,3+i*.9);grp.add(p)}
+ const mk=(w,h,d,c,x,y,z,e)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color:c,emissive:e||0}));m.position.set(x,y,z);grp.add(m);return m};
+ const hw=L.W/2,zb=L.D-.5,ax=(L.aisle-.5-(L.cols-1)/2)*.62;
+ mk(L.sw+.4,L.sw*.42+.4,.1,0x111111,0,3.4,-.52);pan.push(mk(.9,6.9,.35,TM.c,-hw+.5,3.5,.1),mk(.9,6.9,.35,TM.c,hw-.5,3.5,.1));if(!op)mk(L.W,.4,.5,TM.c,0,6.8,.1);
+ mk(L.W-.6,.3,1.2,0x15151a,0,.15,.4);mk(.5,1.2,.5,0x0c0c0e,-L.sw/2-.5,.7,.5);mk(.5,1.2,.5,0x0c0c0e,L.sw/2+.5,.7,.5);
+ for(let i=0;i<L.rows;i++){const y=i*.25+.04,z=3+i*.9-.38;mk(.5,.04,.12,0xffb347,ax,y,z,0xff8a00);mk(.5,.04,.12,0xffb347,-hw+.5,y,z,0xff8a00);mk(.5,.04,.12,0xffb347,hw-.5,y,z,0xff8a00)}
+ for(let k=0;k<Math.floor(L.D/1.6);k++){const z=1+k*1.6;pan.push(mk(.1,3,1.2,TM.w+0x181818,-hw+.06,3.4,z),mk(.1,3,1.2,TM.w+0x181818,hw-.06,3.4,z));mk(.5,.05,.5,0xfff2cc,-L.W/4,6.95,z,0xffe9a8);mk(.5,.05,.5,0xfff2cc,L.W/4,6.95,z,0xffe9a8);mk(.5,.05,.5,0xfff2cc,0,6.95,z,0xffe9a8)}
+ mk(.7,.3,.05,0x22cc66,-hw+.8,5.6,zb-.05,0x11aa44);mk(.7,.3,.05,0x22cc66,hw-.8,5.6,zb-.05,0x11aa44);mk(.9,.45,.05,0x111116,0,5.4,zb-.05,0x223344);
+ L.seats.forEach(s=>{const m=new THREE.MeshStandardMaterial({color:col(s)});const w=s.cat===3?.55:.46;
+  const a=new THREE.Mesh(new THREE.BoxGeometry(w,.3,.45),m),b=new THREE.Mesh(new THREE.BoxGeometry(w,.55,.1),m);
+  a.position.set(s.x,s.y+.2,s.z);b.position.set(s.x,s.y+.5,s.z+.22);a.userData.id=b.userData.id=s.id;grp.add(a,b);seatMesh[s.id]=m;s.m=m});}
+function metrics(s){const dz=s.z-(-.45),dist=Math.hypot(s.x,dz),ang=2*Math.atan(L.sw/2/dist)*180/Math.PI,d=180/Math.PI;
+ return{dist:dist.toFixed(1),ang:ang.toFixed(0),l:(Math.atan((-L.sw/2-s.x)/dz)*d).toFixed(0),r:(Math.atan((L.sw/2-s.x)/dz)*d).toFixed(0),h:(s.y+.45).toFixed(2),off:s.x.toFixed(1)}}
+function render(){const M=$("map");M.innerHTML="";
+ for(let i=0;i<L.rows;i++){const d=document.createElement("div");d.className="row";d.innerHTML=`<span class="rl">${String.fromCharCode(65+i)}</span>`;
+  L.seats.filter(s=>s.i===i).forEach(s=>{if(s.c===L.aisle)d.insertAdjacentHTML("beforeend",'<span class="gap"></span>');const b=document.createElement("button");b.className="s";b.textContent=s.c+1;b.style.background="#"+col(s).toString(16).padStart(6,"0");b.disabled=s.st!=="a";b.onclick=()=>pick(s.id);d.appendChild(b)});M.appendChild(d)}
+ const sl=sel.map(id=>L.seats.find(s=>s.id===id)),tot=sl.reduce((a,s)=>a+CATS[s.cat].p,0);
+ $("sum").innerHTML=sl.length?`<table>${sl.map(s=>`<tr><td>${s.id}</td><td>${CATS[s.cat].n}</td><td>₹${CATS[s.cat].p} <span class="m">(demo)</span></td></tr>`).join("")}<tr><td colspan=2><b>Subtotal (demo)</b></td><td><b>₹${tot}</b></td></tr></table><div class="m" style="margin-top:4px">Convenience fee, taxes and final amount: to come from the authorized pricing integration.</div>`:"No seats selected.";
+ const last=sl.slice(-2);$("cmp").innerHTML=last.length?`<table><tr><th></th>${last.map(s=>`<th>${s.id}</th>`).join("")}</tr>`+[["Distance to screen (m, sim.)","dist"],["Screen viewing angle (°)","ang"],["Left / right edge (°)",null],["Offset from centre (m)","off"],["Seat height (m)","h"]].map(([n,k])=>`<tr><td>${n}</td>${last.map(s=>{const m=metrics(s);return`<td>${k?m[k]:m.l+" / +"+m.r}</td>`}).join("")}</tr>`).join("")+`</table><div class="m">Simulated approximation – not a verified auditorium measurement.</div>`:"Select a seat. Pick two to compare.";}
+function pick(id){const s=L.seats.find(x=>x.id===id);if(!s||s.st!=="a")return;const k=sel.indexOf(id);if(k>=0)sel.splice(k,1);else{if(sel.length>=6)return;sel.push(id)}
+ s.m.color.setHex(col(s));if(k<0){cur=s;mode="s";spin=false;cur.eye=new THREE.Vector3(s.x,s.y+1.15,s.z);yaw=Math.atan2(s.x,s.z+.45);pitch=Math.atan((2.8-(s.y+1.15))/Math.hypot(s.x,s.z+.45));fovT=60}render()}
+function load(){L=build(+$("th").value,$("sc").selectedIndex);sel=[];cur=null;mode="o";spin=false;th=0;ph=.45;fovT=60;rad=L.D*.8;sc.background=new THREE.Color(THEME[L.ti].open?0x0a1428:0x050507);$("lbl").textContent=TH[L.ti]+" · "+$("sc").value;scene3d();render();
+ $("vs").textContent=`Demo layout: ${L.rows} rows × ${L.cols} seats · simulated approximation, awaiting verified theatre geometry.`}
+$("th").onchange=$("sc").onchange=load;
+document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{spin=false;const v=b.dataset.v;mode=v==="f"?"f":"o";yaw=Math.PI;pitch=-.18;th={o:0,f:0,r:0,l:-Math.PI/2,rt:Math.PI/2}[v];ph=v==="o"?.45:.3;rad=L.D*(v==="o"?.8:.7);fovT=60});
+$("spin").onclick=()=>{if(!cur){const c=L.seats.filter(s=>s.st==="a").sort((a,b)=>(Math.abs(a.i-L.rows*.6)+Math.abs(a.x))-(Math.abs(b.i-L.rows*.6)+Math.abs(b.x)))[0];pick(c.id);spin=true}else if(mode!=="s"){mode="s";spin=true}else spin=!spin};
+const pts=new Map();let dn=null,mv=0,pd=0;cv.addEventListener("pointercancel",e=>{pts.delete(e.pointerId);pd=0;dn=null});cv.addEventListener("pointerdown",e=>{pts.set(e.pointerId,[e.clientX,e.clientY]);dn=[e.clientX,e.clientY];if(pts.size===1)mv=0;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener("pointermove",e=>{if(!dn)return;pts.set(e.pointerId,[e.clientX,e.clientY]);if(pts.size>=2){const a=[...pts.values()],d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);if(pd){const k=pd/d;if(mode!=="o")fovT=Math.max(30,Math.min(90,fovT*k));else rad=Math.max(3,Math.min(L.D*1.2,rad*k))}pd=d;mv=99;return}const dx=e.clientX-dn[0],dy=e.clientY-dn[1];dn=[e.clientX,e.clientY];mv+=Math.abs(dx)+Math.abs(dy);
+ if(mode!=="o"){yaw+=dx*.005;pitch=Math.max(-1,Math.min(1,pitch+dy*.005));spin=false}else{th-=dx*.005;ph=Math.max(.05,Math.min(1.4,ph+dy*.005))}});
+cv.addEventListener("pointerup",e=>{pts.delete(e.pointerId);pd=0;dn=pts.size?[...pts.values()][0].slice():null;if(mv<10&&!pts.size){const r=cv.getBoundingClientRect();ray.setFromCamera({x:(e.clientX-r.left)/r.width*2-1,y:-(e.clientY-r.top)/r.height*2+1},cam);const h=ray.intersectObjects(grp.children)[0];if(h&&h.object.userData.id)pick(h.object.userData.id)}});
+cv.addEventListener("wheel",e=>{e.preventDefault();if(mode!=="o")fovT=Math.max(30,Math.min(90,fovT+e.deltaY*.05));else rad=Math.max(3,Math.min(L.D*1.2,rad+e.deltaY*.01))},{passive:false});
+function size(){ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2));const w=cv.clientWidth,h=cv.clientHeight;ren.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()}
+new ResizeObserver(size).observe(cv);
+load();size();cam.position.set(0,6,L.D*1.2);
+(function loop(){requestAnimationFrame(loop);if(spin)yaw+=.008;const ins=Math.abs(cam.position.x)<L.W/2;pan.forEach(m=>m.visible=ins);let p;
+ if(mode==="f"){p=new THREE.Vector3(0,2.2,.9);dm.position.copy(p);dm.rotation.set(pitch,yaw,0,"YXZ")}else if(mode==="s"&&cur){p=cur.eye;dm.position.copy(p);dm.rotation.set(pitch,yaw,0,"YXZ")}
+ else{const t=new THREE.Vector3(0,1.8,L.D*.45);p=new THREE.Vector3(t.x+rad*Math.sin(th)*Math.cos(ph),t.y+rad*Math.sin(ph),t.z+rad*Math.cos(th)*Math.cos(ph));dm.position.copy(p);dm.lookAt(t)}
+ cam.position.lerp(p,.12);cam.quaternion.slerp(dm.quaternion,.12);cam.fov+=(fovT-cam.fov)*.12;cam.updateProjectionMatrix();ren.render(sc,cam)})();
+</script></body></html>
